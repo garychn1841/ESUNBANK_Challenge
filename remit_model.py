@@ -1,7 +1,7 @@
 import pandas as pd
 from sklearn import svm
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.tree import DecisionTreeClassifier
@@ -51,23 +51,23 @@ np.savetxt("remit_pred2.csv", pred2, delimiter=",")
 np.savetxt("remit_pred3.csv", pred3, delimiter=",")
 
 #模型評分
-print('svm training score:',clf.score(X_train_std,y_train))
-print('svm test score:',clf.score(X_test_std,y_test))
-print('decsiontree training score:',clf2.score(X_train_std,y_train))
-print('decsiontree test score:',clf2.score(X_test_std,y_test))
-print('randomforest training score:',forest.score(X_train_std,y_train))
-print('randomforest test score:',forest.score(X_test_std,y_test))
+# print('svm training score:',clf.score(X_train_std,y_train))
+# print('svm test score:',clf.score(X_test_std,y_test))
+# print('decsiontree training score:',clf2.score(X_train_std,y_train))
+# print('decsiontree test score:',clf2.score(X_test_std,y_test))
+# print('randomforest training score:',forest.score(X_train_std,y_train))
+# print('randomforest test score:',forest.score(X_test_std,y_test))
 
 s1 = precision_recall_fscore_support(y_test,pred)
 s2 = precision_recall_fscore_support(y_test,pred2)
 s3 = precision_recall_fscore_support(y_test,pred3)
 
-print('precision_svm major:%f  miner:%f '%(s1[0][0],s1[0][1]))
-print('recall_svm major:%f  miner:%f '%(s1[1][0],s1[1][1]))
-print('precision_decsiontree major:%f  miner:%f '%(s2[0][0],s2[0][1]))
-print('recall_decsiontree major:%f  miner:%f '%(s2[1][0],s2[1][1]))
-print('precision_randomforest major:%f  miner:%f '%(s3[0][0],s3[0][1]))
-print('recall_randomforest major:%f  miner:%f '%(s3[1][0],s3[1][1]))
+# print('precision_svm major:%f  miner:%f '%(s1[0][0],s1[0][1]))
+# print('recall_svm major:%f  miner:%f '%(s1[1][0],s1[1][1]))
+# print('precision_decsiontree major:%f  miner:%f '%(s2[0][0],s2[0][1]))
+# print('recall_decsiontree major:%f  miner:%f '%(s2[1][0],s2[1][1]))
+# print('precision_randomforest major:%f  miner:%f '%(s3[0][0],s3[0][1]))
+# print('recall_randomforest major:%f  miner:%f '%(s3[1][0],s3[1][1]))
 
 
 
@@ -77,3 +77,19 @@ c = forest.predict_proba(X_test_std)
 np.savetxt("remit_proba.csv", a, delimiter=",")
 np.savetxt("remit_proba2.csv", b, delimiter=",")
 np.savetxt("remit_proba3.csv", c, delimiter=",")
+
+
+#public dataset predict
+
+#read data
+row_data = pd.read_csv('remit_public_dataset.csv')
+public_data = np.array(row_data.drop(['alert_key','cust_id','date'],axis = 1))
+
+#data standarized
+public_data_std = sc.transform(public_data)
+
+#predict
+pred  = clf.predict(public_data_std)
+a = clf.predict_proba(public_data_std)
+print(a)
+np.savetxt("remit_public_proba.csv", a, delimiter=",")
