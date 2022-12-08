@@ -62,21 +62,21 @@ s1 = precision_recall_fscore_support(y_test,pred)
 s2 = precision_recall_fscore_support(y_test,pred2)
 s3 = precision_recall_fscore_support(y_test,pred3)
 
-# print('precision_svm major:%f  miner:%f '%(s1[0][0],s1[0][1]))
-# print('recall_svm major:%f  miner:%f '%(s1[1][0],s1[1][1]))
-# print('precision_decsiontree major:%f  miner:%f '%(s2[0][0],s2[0][1]))
-# print('recall_decsiontree major:%f  miner:%f '%(s2[1][0],s2[1][1]))
-# print('precision_randomforest major:%f  miner:%f '%(s3[0][0],s3[0][1]))
-# print('recall_randomforest major:%f  miner:%f '%(s3[1][0],s3[1][1]))
+print('precision_svm major:%f  miner:%f '%(s1[0][0],s1[0][1]))
+print('recall_svm major:%f  miner:%f '%(s1[1][0],s1[1][1]))
+print('precision_decsiontree major:%f  miner:%f '%(s2[0][0],s2[0][1]))
+print('recall_decsiontree major:%f  miner:%f '%(s2[1][0],s2[1][1]))
+print('precision_randomforest major:%f  miner:%f '%(s3[0][0],s3[0][1]))
+print('recall_randomforest major:%f  miner:%f '%(s3[1][0],s3[1][1]))
 
 
 
 a = clf.predict_proba(X_test_std)
 b = clf2.predict_proba(X_test_std)
 c = forest.predict_proba(X_test_std)
-np.savetxt("dp_proba.csv", a, delimiter=",")
-np.savetxt("dp_proba2.csv", b, delimiter=",")
-np.savetxt("dp_proba3.csv", c, delimiter=",")
+# np.savetxt("dp_proba.csv", a, delimiter=",")
+# np.savetxt("dp_proba2.csv", b, delimiter=",")
+# np.savetxt("dp_proba3.csv", c, delimiter=",")
 
 
 #public dataset predict
@@ -91,5 +91,10 @@ public_data_std = sc.transform(public_data)
 #predict
 pred  = clf.predict(public_data_std)
 a = clf.predict_proba(public_data_std)
-print(a)
-np.savetxt("dp_public_proba.csv", a, delimiter=",")
+# print(a)
+# np.savetxt("dp_public_proba.csv", a, delimiter=",")
+
+df_pred = pd.DataFrame(a,columns=['1-probability','probability']).drop('1-probability',axis=1)
+df_dp = pd.concat([row_data,df_pred],axis=1)
+df_dp = df_dp[['alert_key','probability']]
+df_dp.to_csv('dp_public_proba.csv',index=False)

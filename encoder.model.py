@@ -12,7 +12,7 @@ from sklearn.ensemble import RandomForestClassifier
 np.set_printoptions(suppress=True)
 
 #讀去資料
-train_data = pd.read_csv('remit_dataset.csv')
+train_data = pd.read_csv('ccba_dataset.csv')
 # print(train_data)
 
 features = np.array(train_data.drop(['alert_key','sar_flag','cust_id','date'],axis = 1))
@@ -46,9 +46,9 @@ forest.fit(X_train_std,y_train)
 pred  = clf.predict(X_test_std)
 pred2  = clf2.predict(X_test_std)
 pred3  = forest.predict(X_test_std)
-np.savetxt("remit_pred.csv", pred, delimiter=",")
-np.savetxt("remit_pred2.csv", pred2, delimiter=",")
-np.savetxt("remit_pred3.csv", pred3, delimiter=",")
+# np.savetxt("remit_pred.csv", pred, delimiter=",")
+# np.savetxt("remit_pred2.csv", pred2, delimiter=",")
+# np.savetxt("remit_pred3.csv", pred3, delimiter=",")
 
 #模型評分
 print('svm training score:',clf.score(X_train_std,y_train))
@@ -62,12 +62,12 @@ s1 = precision_recall_fscore_support(y_test,pred)
 s2 = precision_recall_fscore_support(y_test,pred2)
 s3 = precision_recall_fscore_support(y_test,pred3)
 
-# print('precision_svm major:%f  miner:%f '%(s1[0][0],s1[0][1]))
-# print('recall_svm major:%f  miner:%f '%(s1[1][0],s1[1][1]))
-# print('precision_decsiontree major:%f  miner:%f '%(s2[0][0],s2[0][1]))
-# print('recall_decsiontree major:%f  miner:%f '%(s2[1][0],s2[1][1]))
-# print('precision_randomforest major:%f  miner:%f '%(s3[0][0],s3[0][1]))
-# print('recall_randomforest major:%f  miner:%f '%(s3[1][0],s3[1][1]))
+print('precision_svm major:%f  miner:%f '%(s1[0][0],s1[0][1]))
+print('recall_svm major:%f  miner:%f '%(s1[1][0],s1[1][1]))
+print('precision_decsiontree major:%f  miner:%f '%(s2[0][0],s2[0][1]))
+print('recall_decsiontree major:%f  miner:%f '%(s2[1][0],s2[1][1]))
+print('precision_randomforest major:%f  miner:%f '%(s3[0][0],s3[0][1]))
+print('recall_randomforest major:%f  miner:%f '%(s3[1][0],s3[1][1]))
 
 
 
@@ -82,7 +82,7 @@ c = forest.predict_proba(X_test_std)
 #public dataset predict
 
 #read data
-row_data = pd.read_csv('remit_public_dataset.csv')
+row_data = pd.read_csv('ccba_public_dataset.csv')
 public_data = np.array(row_data.drop(['alert_key','cust_id','date'],axis = 1))
 
 #data standarized
@@ -96,4 +96,5 @@ a = clf.predict_proba(public_data_std)
 df_pred = pd.DataFrame(a,columns=['1-probability','probability']).drop('1-probability',axis=1)
 df_remit = pd.concat([row_data,df_pred],axis=1)
 df_remit = df_remit[['alert_key','probability']]
-df_remit.to_csv('remit_public_proba.csv',index=False)
+df_remit.to_csv('ccba_public_proba.csv',index=False)
+

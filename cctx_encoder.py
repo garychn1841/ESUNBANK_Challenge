@@ -6,18 +6,18 @@ pd.options.mode.chained_assignment = None  # default='warn'
 
 
 #for Window
-# cctx = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/public_train_x_cdtx0001_full_hashed.csv')
-# train_x_alert = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/train_x_alert_date.csv')
-# custinfo = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/public_train_x_custinfo_full_hashed.csv')
-# answer = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/train_y_answer.csv')
-# leaderboard_cctx_dataset = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/public_x_alert_date.csv')
+cctx = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/public_train_x_cdtx0001_full_hashed.csv')
+train_x_alert = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/train_x_alert_date.csv')
+custinfo = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/public_train_x_custinfo_full_hashed.csv')
+answer = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/train_y_answer.csv')
+leaderboard_cctx_dataset = pd.read_csv('D:/PYTHON/Dataset/ESUNBANK_Challenge/public_x_alert_date.csv')
 
 #for Mac
-cctx = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/public_train_x_cdtx0001_full_hashed.csv')
-train_x_alert = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/train_x_alert_date.csv')
-custinfo = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/public_train_x_custinfo_full_hashed.csv')
-answer = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/train_y_answer.csv')
-leaderboard_dataset = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/public_x_alert_date.csv')
+# cctx = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/public_train_x_cdtx0001_full_hashed.csv')
+# train_x_alert = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/train_x_alert_date.csv')
+# custinfo = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/public_train_x_custinfo_full_hashed.csv')
+# answer = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/train_y_answer.csv')
+# leaderboard_dataset = pd.read_csv('/Users/huanghui-chu/Documents/python/dataset/ESUNBANK_Challenge/public_x_alert_date.csv')
 
 def cctx_train_preprocessing(dataset):
 

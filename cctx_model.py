@@ -53,12 +53,12 @@ np.savetxt("cctx_pred2.csv", pred2, delimiter=",")
 np.savetxt("cctx_pred3.csv", pred3, delimiter=",")
 
 #模型評分
-# print('svm training score:',clf.score(X_train_std,y_train))
-# print('svm test score:',clf.score(X_test_std,y_test))
-# print('decsiontree training score:',clf2.score(X_train_std,y_train))
-# print('decsiontree test score:',clf2.score(X_test_std,y_test))
-# print('randomforest training score:',forest.score(X_train_std,y_train))
-# print('randomforest test score:',forest.score(X_test_std,y_test))
+print('svm training score:',clf.score(X_train_std,y_train))
+print('svm test score:',clf.score(X_test_std,y_test))
+print('decsiontree training score:',clf2.score(X_train_std,y_train))
+print('decsiontree test score:',clf2.score(X_test_std,y_test))
+print('randomforest training score:',forest.score(X_train_std,y_train))
+print('randomforest test score:',forest.score(X_test_std,y_test))
 
 s1 = precision_recall_fscore_support(y_test,pred)
 s2 = precision_recall_fscore_support(y_test,pred2)
@@ -83,5 +83,10 @@ public_data_std = sc.transform(public_data)
 #predict
 pred  = clf.predict(public_data_std)
 a = clf.predict_proba(public_data_std)
-print(a)
-np.savetxt("cctx_public_proba.csv", a, delimiter=",")
+# print(a)
+# np.savetxt("cctx_public_proba.csv", a, delimiter=",")
+
+df_pred = pd.DataFrame(a,columns=['1-probability','probability']).drop('1-probability',axis=1)
+df_cctx = pd.concat([row_data,df_pred],axis=1)
+df_cctx = df_cctx[['alert_key','probability']]
+df_cctx.to_csv('cctx_public_proba.csv',index=False)
